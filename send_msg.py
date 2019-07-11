@@ -26,7 +26,7 @@ def sender():
     data_count_15_prev = 0
     data_count_60_prev = 0
     time_now = time.time()
-
+    send_Tmsg = ''
     sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`  FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
         time_now - 900, 1, 1)
     sql2 = "SELECT `id` FROM products WHERE `updated_at` > {}".format(time_now - 3600)
@@ -34,11 +34,13 @@ def sender():
     while condition:
         data_15 = sql_query(sql1)
         if data_count_15_prev < len(data_15):
-            Tmsg = "Name: {}, Prise: {}, https://airsofter.world/ru-ru/product/{}".format(data_15[0]['name'],
-                                                                                          data_15[0]['price'],
-                                                                                          data_15[0]['id'])
+            for i in data_15:
+                Tmsg = "Name: {}, Prise: {}, https://airsofter.world/ru-ru/product/{}".format(i['name'],
+                                                                                              i['price'],
+                                                                                              i['id'])
+                send_Tmsg +=(Tmsg+ '\n')
             requests.get(
-                "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
+                "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, send_Tmsg))
             data_count_15_prev = len(data_15)
         counter += 1
         print(counter)

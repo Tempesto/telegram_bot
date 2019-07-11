@@ -9,7 +9,7 @@ def connect():
         port = 3306,
         user = 'nonroot',
         password = 'dFsd423vcvSsxXX',
-        db = 'airsoft',
+        db = 'stage_airsoftorg',
         cursorclass=pymysql.cursors.DictCursor
     )
     return con

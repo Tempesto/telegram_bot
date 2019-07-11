@@ -17,6 +17,8 @@ def sql_query(query_str):
     finally:
         con.close()
 
+
+
 def sender():
     condition = True
     msg_prev = []

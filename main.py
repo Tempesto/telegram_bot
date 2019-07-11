@@ -16,10 +16,10 @@ def do_start(bot: Bot, update: Update):
 
 def do_echo(bot: Bot, update: Update):
     print('chat_id = ', update.message.chat_id)
-    # text = update.message.text
+    text = update.message.chat_id
     bot.send_message(
         chat_id=update.message.chat_id,
-        # text=text,
+        text=text,
     )
 
 def main():
@@ -38,6 +38,6 @@ def main():
 
 if __name__ == '__main__':
     sender()
-    main()
+    # main()
 
 

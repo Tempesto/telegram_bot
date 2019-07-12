@@ -21,19 +21,17 @@ def sql_query(query_str):
 
 def sender():
     condition = True
-    msg_prev = []
     counter = 0
     data_count_15_prev = 0
-    data_count_60_prev = 0
-    sql1 = ''
-    sql2 = ''
+
+
     while condition:
         time.sleep(60)
         time_now = time.time()
         send_Tmsg = ''
         sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`  FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
             time_now - 60, 1, 1)
-        sql2 = "SELECT `id` FROM products WHERE `updated_at` > {}".format(time_now - 240)
+        sql2 = "SELECT COUNT `id` FROM products WHERE `updated_at` > {}".format(time_now - 240)
         data_15 = sql_query(sql1)
         if data_count_15_prev < len(data_15):
             for i in data_15:
@@ -48,17 +46,10 @@ def sender():
         print(counter)
         if counter == 4:
             data_60 = sql_query(sql2)
-            if data_count_60_prev <= len(data_60):
-                Tmsg = 'The site has {} new products'.format(
-                    len(data_60)) + ' https://airsofter.world/ru-ru/market/index'
-                requests.get(
-                    "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
-                data_count_60_prev = len(data_60)
-            else:
-                Tmsg = 'The site has {} new products'.format(
-                    len(data_60)) + ' https://airsofter.world/ru-ru/market/index'
-                requests.get(
-                    "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
-                data_count_60_prev = len(data_60)
+            Tmsg = 'The site has {} new products'.format(
+                data_60) + ' https://airsofter.world/ru-ru/market/index'
+            requests.get(
+                "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
+
         if counter == 4:
             counter = 0

@@ -28,12 +28,12 @@ def sender():
     sql1 = ''
     sql2 = ''
     while condition:
-        time.sleep(300)
+        time.sleep(60)
         time_now = time.time()
         send_Tmsg = ''
         sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`  FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
-            time_now - 300, 1, 1)
-        sql2 = "SELECT `id` FROM products WHERE `updated_at` > {}".format(time.time() - 1200)
+            time_now - 60, 1, 1)
+        sql2 = "SELECT `id` FROM products WHERE `updated_at` > {}".format(time_now - 240)
         data_15 = sql_query(sql1)
         if data_count_15_prev < len(data_15):
             for i in data_15:

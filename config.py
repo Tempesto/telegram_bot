@@ -1,7 +1,7 @@
 import pymysql.cursors
 
 TG_TOKEN = "848307854:AAElOophxSdlMf8UXubudIQnXfWv8VuU_bE"
-CHAT_ID = "-1001192663900" #-1001192663900 249356603
+CHAT_ID = "249356603" #-1001192663900 249356603
 
 def connect():
     con = pymysql.connect(

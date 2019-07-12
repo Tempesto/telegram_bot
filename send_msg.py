@@ -25,13 +25,15 @@ def sender():
     counter = 0
     data_count_15_prev = 0
     data_count_60_prev = 0
-    time_now = time.time()
-    send_Tmsg = ''
-    sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`  FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
-        time_now - 900, 1, 1)
-    sql2 = "SELECT `id` FROM products WHERE `updated_at` > {}".format(time_now - 3600)
-
+    sql1 = ''
+    sql2 = ''
     while condition:
+        time.sleep(900)
+        time_now = time.time()
+        send_Tmsg = ''
+        sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`  FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
+            time_now - 900, 1, 1)
+        sql2 = "SELECT `id` FROM products WHERE `updated_at` > {}".format(time.time() - 3600)
         data_15 = sql_query(sql1)
         if data_count_15_prev < len(data_15):
             for i in data_15:
@@ -41,13 +43,18 @@ def sender():
                 send_Tmsg +=(Tmsg+ '\n')
             requests.get(
                 "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, send_Tmsg))
-            data_count_15_prev = len(data_15)
+            # data_count_15_prev = len(data_15)
         counter += 1
         print(counter)
-        time.sleep(900)
         if counter == 4:
             data_60 = sql_query(sql2)
-            if data_count_60_prev < len(data_60):
+            if data_count_60_prev <= len(data_60):
+                Tmsg = 'The site has {} new products'.format(
+                    len(data_60)) + ' https://airsofter.world/ru-ru/market/index'
+                requests.get(
+                    "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
+                data_count_60_prev = len(data_60)
+            else:
                 Tmsg = 'The site has {} new products'.format(
                     len(data_60)) + ' https://airsofter.world/ru-ru/market/index'
                 requests.get(

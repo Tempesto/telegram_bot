@@ -27,6 +27,7 @@ def sender():
         time.sleep(3)
         time_now = time.time()
         send_Tmsg = ''
+        New_prod_mes = []
         sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`, `product_image_one`, `description` FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
             time_now - 10, 1, 1)
         sql2 = "SELECT COUNT(`id`) FROM products WHERE `updated_at` > {}".format(time_now - 40)
@@ -35,24 +36,29 @@ def sender():
         if data_count_15_prev < len(data_15):
             for i in data_15:
                 print(i['product_image_one'])
-                photo = "https://airsofter.world/images/product-image/{} \n".format(i['product_image_one'])
-                Tmsg = "https://airsofter.world/images/product-image/{} Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}".format(
-                    i['product_image_one'],
+                photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])
+                Tmsg = f'[⁠]({photo})\n'
+                des='Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}'.format(
+                    # i['product_image_one'],
                     i['name'],
                     i['price'],
                     i['id'])
-
-                send_Tmsg += (Tmsg + '\n')
+                output_mes = Tmsg +des
+                # send_Tmsg += (q + '\n')
+                New_prod_mes.append(output_mes)
 
                 # send_Tmsg = '[] https://airsofter.world/images/product-image/9/6/6/5cfebb6cbfea8.jpg','Some text here.'
 
-                print(send_Tmsg)
-            url = 'https://api.telegram.org/bot848307854:AAElOophxSdlMf8UXubudIQnXfWv8VuU_bE/sendMessage?parse_mode=markdown&chat_id=249356603'
+                # print(q)
+            url = 'https://api.telegram.org/bot848307854:AAElOophxSdlMf8UXubudIQnXfWv8VuU_bE/sendMessage?parse_mode=markdown&chat_id=249356603&text='
             send_message = '/sendMessage?parse_mode=html'
             chat = '&chat_id=',CHAT_ID
-            text_message = '&text='+send_Tmsg
-            print(text_message)
-            requests.get(url, f'[.]{text_message}')
+            text_message = f'[⁠]({send_Tmsg}g'
+            print('!!!!!!!!!!!!',send_Tmsg)
+            for ii in New_prod_mes:
+                print('ii = ',ii)
+
+                requests.get(url+ ii)
             # requests.get(
             #     "https://api.telegram.org/bot{}/sendMessage?parse_mode=html&chat_id={}&text={}".format(TG_TOKEN,
             #                                                                                            CHAT_ID,

@@ -21,6 +21,8 @@ def do_echo(bot: Bot, update: Update):
         chat_id=update.message.chat_id,
         text=text,
     )
+    # photo = 'https://airsofter.world/images/product-image/9/6/6/5cfebb6cbfea8.jpg'
+    # bot.send_message(chat_id=249356603, text= f'[⁠]({photo})', parse_mode='markdown')
 
 def main():
     bot = Bot(token= TG_TOKEN,)

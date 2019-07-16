@@ -26,10 +26,10 @@ def sender():
     counter = 0
     data_count_15_prev = 0
     time_now = 0
+    end_url_img = []
     while condition:
         time.sleep(3)
         time_now = time.time()
-        send_Tmsg = ''
         New_prod_mes = []
         sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`, `product_image_one`, `description` FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
             time_now - 10, 1, 1)
@@ -38,57 +38,59 @@ def sender():
 
         if data_count_15_prev < len(data_15):
             for i in data_15:
-                # print(i['product_image_one'])
                 photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])
-                Tmsg = f'[⁠]({photo})\n'
-                img =[[InlineKeyboardButton('Товар', url='https://airsofter.world/ru-ru/product/{}'.format(i['id']))]]
-                # print('img ===',img)
-                url_img= InlineKeyboardMarkup(img)
-                des='Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}'.format(i['name'], i['price'], i['id'])
-                print('url_img =', url_img)
-                # fff = {'inline_keyboard': [[{'text': 'Товар', 'url': 'https://airsofter.world/ru-ru/product/{}'.format(i['product_image_one'])}]]}
-
-                output_mes = Tmsg +des
-                print('output_mes =', output_mes)
+                Tmsg = f'[⁠]({photo})'
+                img = [
+                    [InlineKeyboardButton('View more', url='https://airsofter.world/ru-ru/product/{}'.format(i['id']))]]
+                url_img = InlineKeyboardMarkup(img)
+                end_url_img.append(url_img)
+                if len(i['name']) > 36:
+                    new_name= i['name'][0:36]+'\n'+ i['name'][37:]
+                    print('new_name =', new_name)
+                    des = 'Name: {}\nPrise: {}'.format(new_name, i['price'])
+                    new_name=''
+                else:
+                    des = 'Name: {}\nPrise: {}'.format(i['name'], i['price'])
+                output_mes = Tmsg + des
                 New_prod_mes.append(output_mes)
-            print('New_prod_mes==',New_prod_mes)
-            # urll = 'https://api.telegram.org/bot{}/sendMessage?&reply_markup={}&parse_mode=markdown&chat_id={}&text='.format(TG_TOKEN,fff, CHAT_ID)
-            # print('url = ', url)
-            for ii in New_prod_mes:
-                print('ii = ',url_img)
+            print('New_prod_mes==', New_prod_mes)
+            for num, prod in enumerate(New_prod_mes):
                 data = {
                     "chat_id": CHAT_ID,
                     "parse_mode": "markdown",
-                    "text": ii,
-                    "reply_markup": json.dumps(url_img.to_dict())
+                    "text": prod,
+                    "reply_markup": json.dumps(end_url_img[num].to_dict())
                 }
-                print('data =',data)
+                print('data =', data)
                 requests.post(url='https://api.telegram.org/bot{}/sendMessage'.format(TG_TOKEN), data=data)
-
-
-
             data_count_15_prev = len(data_15)
 
         elif data_count_15_prev > len(data_15):
             for i in data_15:
-                print(i['product_image_one'])
                 photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])
-                Tmsg = f'[⁠]({photo})\n'
-
-                des='Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}'.format(i['name'], i['price'],i['id'])
-                output_mes = Tmsg +des
+                Tmsg = f'[⁠]({photo})'
+                img = [
+                    [InlineKeyboardButton('View more', url='https://airsofter.world/ru-ru/product/{}'.format(i['id']))]]
+                url_img = InlineKeyboardMarkup(img)
+                end_url_img.append(url_img)
+                if len(i['name']) > 36:
+                    new_name= i['name'][0:36]+'...'
+                    print('new_name =', new_name)
+                    des = 'Name: {}\nPrise: {}'.format(new_name, i['price'])
+                    new_name=''
+                else:
+                    des = 'Name: {}\nPrise: {}'.format(i['name'], i['price'])
+                output_mes = Tmsg + des
                 New_prod_mes.append(output_mes)
-            url = 'https://api.telegram.org/bot{}/sendMessage?parse_mode=markdown&chat_id={}&text='.format(TG_TOKEN, CHAT_ID)
-            print('!!!!!!!!!!!!',send_Tmsg)
-            for ii in New_prod_mes:
-                print('ii = ',url_img)
+            print('New_prod_mes==', New_prod_mes)
+            for num, prod in enumerate(New_prod_mes):
                 data = {
                     "chat_id": CHAT_ID,
                     "parse_mode": "markdown",
-                    "text": ii,
-                    "reply_markup": json.dumps(url_img.to_dict())
+                    "text": prod,
+                    "reply_markup": json.dumps(end_url_img[num].to_dict())
                 }
-                print('data =',data)
+                print('data =', data)
                 requests.post(url='https://api.telegram.org/bot{}/sendMessage'.format(TG_TOKEN), data=data)
             data_count_15_prev = len(data_15)
 
@@ -98,7 +100,7 @@ def sender():
             data_60 = sql_query(sql2)
             Tmsg = 'The site has {} new products'.format(
                 data_60[0]['COUNT(`id`)']) + ' https://airsofter.world/ru-ru/market/index'
-            print('Tmsg =',Tmsg)
+            print('Tmsg =', Tmsg)
             requests.get(
                 "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
 

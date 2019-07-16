@@ -24,14 +24,6 @@ def do_start(bot: Bot, update: Update):
         # text = update.message.chat_id,
     )
 
-# def get_base_inline_keyboard():
-#     keyboard = [
-#         [
-#         InlineKeyboardButton('ffff', url='{}'.format('https://airsofter.world/images/product-image/9/6/6/5cfebb6cbfea8.jpg'))
-#         ]
-#     ]
-#     return InlineKeyboardMarkup(keyboard)
-
 key = [
     [
         InlineKeyboardButton('ddd', url='https://airsofter.world/images/product-image/9/6/6/5cfebb6cbfea8.jpg')

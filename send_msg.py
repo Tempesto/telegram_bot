@@ -2,6 +2,9 @@ import requests
 from config import connect
 from config import TG_TOKEN, CHAT_ID
 import time
+from telegram import InlineKeyboardButton
+from telegram import InlineKeyboardMarkup
+import json
 
 
 def sql_query(query_str):
@@ -35,52 +38,67 @@ def sender():
 
         if data_count_15_prev < len(data_15):
             for i in data_15:
+                # print(i['product_image_one'])
+                photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])
+                Tmsg = f'[⁠]({photo})\n'
+                img =[[InlineKeyboardButton('Товар', url='https://airsofter.world/ru-ru/product/{}'.format(i['id']))]]
+                # print('img ===',img)
+                url_img= InlineKeyboardMarkup(img)
+                des='Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}'.format(i['name'], i['price'], i['id'])
+                print('url_img =', url_img)
+                # fff = {'inline_keyboard': [[{'text': 'Товар', 'url': 'https://airsofter.world/ru-ru/product/{}'.format(i['product_image_one'])}]]}
+
+                output_mes = Tmsg +des
+                print('output_mes =', output_mes)
+                New_prod_mes.append(output_mes)
+            print('New_prod_mes==',New_prod_mes)
+            # urll = 'https://api.telegram.org/bot{}/sendMessage?&reply_markup={}&parse_mode=markdown&chat_id={}&text='.format(TG_TOKEN,fff, CHAT_ID)
+            # print('url = ', url)
+            for ii in New_prod_mes:
+                print('ii = ',url_img)
+                data = {
+                    "chat_id": CHAT_ID,
+                    "parse_mode": "markdown",
+                    "text": ii,
+                    "reply_markup": json.dumps(url_img.to_dict())
+                }
+                print('data =',data)
+                requests.post(url='https://api.telegram.org/bot{}/sendMessage'.format(TG_TOKEN), data=data)
+
+
+
+            data_count_15_prev = len(data_15)
+
+        elif data_count_15_prev > len(data_15):
+            for i in data_15:
                 print(i['product_image_one'])
                 photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])
                 Tmsg = f'[⁠]({photo})\n'
-                des='Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}'.format(
-                    # i['product_image_one'],
-                    i['name'],
-                    i['price'],
-                    i['id'])
+
+                des='Name: {}\nPrise: {}\nhttps://airsofter.world/ru-ru/product/{}'.format(i['name'], i['price'],i['id'])
                 output_mes = Tmsg +des
-                # send_Tmsg += (q + '\n')
                 New_prod_mes.append(output_mes)
-
-                # send_Tmsg = '[] https://airsofter.world/images/product-image/9/6/6/5cfebb6cbfea8.jpg','Some text here.'
-
-                # print(q)
-            url = 'https://api.telegram.org/bot848307854:AAElOophxSdlMf8UXubudIQnXfWv8VuU_bE/sendMessage?parse_mode=markdown&chat_id=249356603&text='
-            send_message = '/sendMessage?parse_mode=html'
-            chat = '&chat_id=',CHAT_ID
-            text_message = f'[⁠]({send_Tmsg}g'
+            url = 'https://api.telegram.org/bot{}/sendMessage?parse_mode=markdown&chat_id={}&text='.format(TG_TOKEN, CHAT_ID)
             print('!!!!!!!!!!!!',send_Tmsg)
             for ii in New_prod_mes:
-                print('ii = ',ii)
+                print('ii = ',url_img)
+                data = {
+                    "chat_id": CHAT_ID,
+                    "parse_mode": "markdown",
+                    "text": ii,
+                    "reply_markup": json.dumps(url_img.to_dict())
+                }
+                print('data =',data)
+                requests.post(url='https://api.telegram.org/bot{}/sendMessage'.format(TG_TOKEN), data=data)
+            data_count_15_prev = len(data_15)
 
-                requests.get(url+ ii)
-            # requests.get(
-            #     "https://api.telegram.org/bot{}/sendMessage?parse_mode=html&chat_id={}&text={}".format(TG_TOKEN,
-            #                                                                                            CHAT_ID,
-            #                                                                                            send_Tmsg))
-            data_count_15_prev = len(data_15)
-        elif data_count_15_prev > len(data_15):
-            for i in data_15:
-                Tmsg = "Name: {}, Prise: {}, https://airsofter.world/ru-ru/product/{}".format(i['name'],
-                                                                                              i['price'],
-                                                                                              i['id'])
-                send_Tmsg += (Tmsg + '\n')
-                print(send_Tmsg)
-            requests.get(
-                "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, send_Tmsg))
-            data_count_15_prev = len(data_15)
         counter += 1
         print(counter)
         if counter == 4:
             data_60 = sql_query(sql2)
             Tmsg = 'The site has {} new products'.format(
                 data_60[0]['COUNT(`id`)']) + ' https://airsofter.world/ru-ru/market/index'
-            print(Tmsg)
+            print('Tmsg =',Tmsg)
             requests.get(
                 "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(TG_TOKEN, CHAT_ID, Tmsg))
 

@@ -28,11 +28,11 @@ def sender():
     time_now = 0
     end_url_img = []
     while condition:
-        time.sleep(10)
+        time.sleep(900)
         time_now = time.time()
         New_prod_mes = []
         sql1 = "SELECT `id`, `name`, `price`, `updated_at`, `recommended`, `published`, `product_image_one`, `description` FROM products WHERE `updated_at` > {} AND `recommended` = {} and `published` = {}".format(
-            time_now - 10, 1, 1)
+            time_now - 900, 1, 1)
         sql2 = "SELECT COUNT(`id`) FROM products WHERE `updated_at` > {}".format(time_now - 3600)
         data_15 = sql_query(sql1)
 

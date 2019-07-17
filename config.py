@@ -8,9 +8,9 @@ def connect():
     con = pymysql.connect(
         host = '127.0.0.1',
         port = 3306,
-        user = 'airsoft',
-        password = '123',
-        db = 'airsoft',
+        user = 'nonroot',
+        password = 'dFsd423vcvSsxXX',
+        db = 'stage_airsoftorg',
         cursorclass=pymysql.cursors.DictCursor
     )
     return con

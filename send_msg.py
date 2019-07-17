@@ -35,7 +35,6 @@ def sender():
             time_now - 900, 1, 1)
         sql2 = "SELECT COUNT(`id`) FROM products WHERE `updated_at` > {}".format(time_now - 3600)
         data_15 = sql_query(sql1)
-
         if data_count_15_prev < len(data_15):
             for i in data_15:
                 photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])

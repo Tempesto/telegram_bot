@@ -68,7 +68,7 @@ def sender():
         elif data_count_15_prev > len(data_15):
             for i in data_15:
                 photo = 'https://airsofter.world/images/product-image/{} \n'.format(i['product_image_one'])
-                Tmsg = f'[⁠]({photo})'
+                Tmsg = '[⁠]({})'.format(photo)
                 img = [
                     [InlineKeyboardButton('View more', url='https://airsofter.world/ru-ru/product/{}'.format(i['id']))]]
                 url_img = InlineKeyboardMarkup(img)

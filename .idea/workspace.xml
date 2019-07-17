@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="483f65f9-551f-4e5d-939a-f36d0544b40c" name="Default Changelist" comment="Work button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+            <state relative-caret-position="57">
+              <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -217,7 +218,7 @@
       <updated>1562569184735</updated>
       <workItem from="1562569185992" duration="1287000" />
       <workItem from="1562570611292" duration="14948000" />
-      <workItem from="1562657570446" duration="139671000" />
+      <workItem from="1562657570446" duration="140368000" />
     </task>
     <task id="LOCAL-00001" summary="Work button">
       <created>1563279485775</created>
@@ -230,7 +231,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155906000" />
+    <option name="totallyTimeSpent" value="156603000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -368,8 +369,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        <state relative-caret-position="57">
+          <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="39" />
         </state>
       </provider>
     </entry>

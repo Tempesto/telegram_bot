@@ -47,10 +47,10 @@ def sender():
                 if len(i['name']) > 36:
                     new_name= i['name'][0:36]+'\n'+ i['name'][37:]
                     print('new_name =', new_name)
-                    des = 'Name: {}\nPrise: {}'.format(new_name, i['price'])
+                    des = 'Name: {}\nPrice: {}'.format(new_name, i['price'])
                     new_name=''
                 else:
-                    des = 'Name: {}\nPrise: {}'.format(i['name'], i['price'])
+                    des = 'Name: {}\nPrice: {}'.format(i['name'], i['price'])
                 output_mes = Tmsg + des
                 New_prod_mes.append(output_mes)
             print('New_prod_mes==', New_prod_mes)
@@ -76,10 +76,10 @@ def sender():
                 if len(i['name']) > 36:
                     new_name= i['name'][0:36]+'\n'+ i['name'][37:]
                     print('new_name =', new_name)
-                    des = 'Name: {}\nPrise: {}'.format(new_name, i['price'])
+                    des = 'Name: {}\nPrice: {}'.format(new_name, i['price'])
                     new_name=''
                 else:
-                    des = 'Name: {}\nPrise: {}'.format(i['name'], i['price'])
+                    des = 'Name: {}\nPrice: {}'.format(i['name'], i['price'])
                 output_mes = Tmsg + des
                 New_prod_mes.append(output_mes)
             print('New_prod_mes==', New_prod_mes)

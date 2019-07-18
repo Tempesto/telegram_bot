@@ -29,8 +29,8 @@ def sender():
     time_now = 0
     end_url_img = []
     while condition:
-        # hour_now = datetime.datetime.now().hour
-        hour_now = 8
+        hour_now = datetime.datetime.now().hour
+        # hour_now = 8
         if 9 <= hour_now < 20:
             print("Time ok", hour_now,':', datetime.datetime.now().minute)
             time.sleep(900)

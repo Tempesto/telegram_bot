@@ -9,8 +9,16 @@ def connect():
         host = '127.0.0.1',
         port = 3306,
         user = 'nonroot',
+<<<<<<< HEAD
         password = 'dFsd423vcvSsxXX',
         db = 'airsoft',
+=======
+        # user = 'user',
+        password = 'dFsd423vcvSsxXX',
+        # password = 123,
+        db = 'airsoft',
+        # db = 'stage_airsoftorg',
+>>>>>>> 68654e2... Настройки для glob
         cursorclass=pymysql.cursors.DictCursor
     )
     return con

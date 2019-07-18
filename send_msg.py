@@ -29,8 +29,8 @@ def sender():
     time_now = 0
     end_url_img = []
     while condition:
-        hour_now = datetime.datetime.now().hour
-        # hour_now = 20
+        # hour_now = datetime.datetime.now().hour
+        hour_now = 8
         if 9 <= hour_now < 20:
             print("Time ok", hour_now,':', datetime.datetime.now().minute)
             time.sleep(900)
@@ -115,8 +115,8 @@ def sender():
                 counter = 0
         else:
             print('Time sleep', hour_now)
-            time.sleep(46800)
-            sql3 = "SELECT COUNT(`id`) FROM products WHERE `updated_at` > {}".format(time_now - 46800)
+            time.sleep(50400)
+            sql3 = "SELECT COUNT(`id`) FROM products WHERE `updated_at` > {}".format(time_now - 50400)
             data_46800 = sql_query(sql3)
             Tmsg = 'Product update\nThe website has {} new products'.format(
                     data_46800[0]['COUNT(`id`)']) + ' https://airsofter.world/ru-ru/market/index'

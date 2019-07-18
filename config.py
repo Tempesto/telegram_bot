@@ -11,9 +11,12 @@ def connect():
         user = 'nonroot',
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         password = 'dFsd423vcvSsxXX',
         db = 'airsoft',
 =======
+=======
+>>>>>>> 68654e2... Настройки для glob
 =======
 >>>>>>> 68654e2... Настройки для glob
         # user = 'user',
@@ -22,6 +25,9 @@ def connect():
         db = 'airsoft',
         # db = 'stage_airsoftorg',
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 68654e2... Настройки для glob
+=======
 >>>>>>> 68654e2... Настройки для glob
 =======
 >>>>>>> 68654e2... Настройки для glob
